@@ -99,6 +99,7 @@ for ((i=0; i<date_range; i++)); do
   end_date=$(date -d "$date + $i day" "+%Y-%m-%dT17:59:00-04:00")
 
   url="https://www.meetup.com/find/?source=EVENTS&eventType=inPerson&keywords=$keyword&location=pl--$city&customStartDate=$start_date&customEndDate=$end_date"
+  #echo "$url"
   page_content=$(curl -s "$url")
 
   event_urls=$(echo "$page_content" | grep -o -P 'href="https://www.meetup.com/[^"]+/events/[0-9]+/"' | sort | uniq | cut -d '"' -f 2 | cut -d '"' -f 1)
